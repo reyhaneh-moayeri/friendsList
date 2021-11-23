@@ -12,6 +12,7 @@
     :phone-number="friend.phone"
     :is-favourit="friend.isFavourit"
     @toggle-favourite="toggleFavouritStatus"
+    @delete-friend="deleteFriend"
   ></friend-contact>
 </template>
 
@@ -53,13 +54,16 @@ export default {
     },
     addContact(name, phone, email) {
       const newFriendContact = {
-        id: new Date().toDateString(),
+        id: new Date().getMilliseconds().toString(),
         name: name,
         email: email,
         phone: phone,
         isFavourit: false,
       };
       this.friends.push(newFriendContact);
+    },
+    deleteFriend(friendId) {
+      this.friends = this.friends.filter((friend) => friend.id !== friendId);
     },
   },
 };
