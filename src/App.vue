@@ -2,6 +2,7 @@
   <header>
     <h2>Friends List</h2>
   </header>
+  <new-friend @add-contact="addContact"></new-friend>
   <friend-contact
     v-for="friend in friends"
     :key="friend.id"
@@ -49,6 +50,16 @@ export default {
         (friend) => friend.id === friendId
       );
       identifiedFriend.isFavourit = !identifiedFriend.isFavourit;
+    },
+    addContact(name, phone, email) {
+      const newFriendContact = {
+        id: new Date().toDateString(),
+        name: name,
+        email: email,
+        phone: phone,
+        isFavourit: false,
+      };
+      this.friends.push(newFriendContact);
     },
   },
 };
